@@ -56,15 +56,15 @@ optimize!(model)
 println("") # Printing white line after solver output, before printing
 println("Termination statue: ", JuMP.termination_status(model))
 println("Optimal(?) objective function value: ", JuMP.objective_value(model))
-println("\nOptimal(?) power: ", round.(JuMP.value.(p), digits=5))
-println("Optimal(?) voltage: ", round.(JuMP.value.(v), digits=5))
-println("Optimal(?) phase: ", round.(JuMP.value.(phi), digits=5))
+println("\nOptimal(?) power: ", round.(JuMP.value.(p), digits=6))
+println("Optimal(?) voltage: ", round.(JuMP.value.(v), digits=6))
+println("Optimal(?) phase: ", round.(JuMP.value.(phi), digits=6))
 println("\nDual variables/Lagrange multipliers corresponding to some of the constraints: ")
-println("active power constraints", round.(JuMP.dual.(active_power_constraints), digits=5))
-println("reactive power constraints", round.(JuMP.dual.(reactive_power_constraints), digits=5))
-println("power: ", round.(JuMP.dual.(JuMP.UpperBoundRef.(p)), digits=5))
-println("voltage: ", round.(JuMP.dual.(JuMP.UpperBoundRef.(v)), digits=5))
-println("phase: ", round.(JuMP.dual.(JuMP.UpperBoundRef.(phi)), digits=5))
+println("active power constraints", round.(JuMP.dual.(active_power_constraints), digits=6))
+println("reactive power constraints", round.(JuMP.dual.(reactive_power_constraints), digits=6))
+println("power: ", round.(JuMP.dual.(JuMP.UpperBoundRef.(p)), digits=6))
+println("voltage: ", round.(JuMP.dual.(JuMP.UpperBoundRef.(v)), digits=6))
+println("phase: ", round.(JuMP.dual.(JuMP.UpperBoundRef.(phi)), digits=6))
 
 p = JuMP.value.(p)
 v = JuMP.value.(v)
@@ -85,9 +85,9 @@ end
 
 # Calculate the net flow into or from
 net_flow = sum(flow_active, dims=2)
-println("\n Net flow from (negative values indicate net flow to): ", round.(net_flow, digits=4))
+println("\n Net flow from (negative values indicate net flow to): ", round.(net_flow, digits=6))
 
 # All flows as matrixes
 println("\nFlows as matrixes")
-println(round.(flow_active, digits=5))
-println(round.(flow_reactive, digits=5))
+println(round.(flow_active, digits=6))
+println(round.(flow_reactive, digits=6))
