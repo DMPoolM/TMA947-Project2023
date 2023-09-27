@@ -6,7 +6,7 @@ include("data.jl")
 # Create the model object
 model = Model(Ipopt.Optimizer)
 
-# We need three variables for our problem
+# We set three variables for solving the problem
 # p: power generation by generator i
 # phi: phase at node j
 # v: voltage at node j
@@ -14,10 +14,10 @@ model = Model(Ipopt.Optimizer)
 @variable(model, phi_lb <= phi[1:n_nodes] <= phi_ub)
 @variable(model, voltage_lb <= v[1:n_nodes] <= voltage_ub)
 
-# Set the objective function to minimize the sum of the cost for all generators
+# Set the objective function which would minimise the sum of the cost for all generators
 @objective(model, Min, sum(generator_cost[i] * p[i] for i in 1:n_generators))
 
-# Loop through the nodes and set the individual constraints for all of them
+# Loop through the nodes, then calculate and set the individual constraints for all of them
 # sum(p_kl(v[i], v[j], phi[i], phi[j], i, j) for j in 1:nodes) is the power flow into a node i
 active_power_constraints = []
 reactive_power_constraints = []
