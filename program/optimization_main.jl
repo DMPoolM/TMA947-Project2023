@@ -37,7 +37,7 @@ for i in 1:n_nodes
     constraint = @NLconstraint(model, 
         - node_reactive_power[i]
         <= sum(
-                -v[i]^2.0 * b_kl[i, j] + v[i] * v[j] * b_kl[i, j]*cos(phi[i] - phi[j]) - v[i] * v[j] * g_kl[i, j] * sin(phi[i] - phi[j])
+                -v[i]^2.0 * b_kl[i, j] + v[i] * v[j] * b_kl[i, j]*cos(phi[i] - phi[j]) - v[i] * v[j] * g_kl[i, j] * sin(phi[i] - phi[j]) # net flow of sum q_kl (reactive power)
                 for j in 1:n_nodes
             ) 
         <= node_reactive_power[i]
