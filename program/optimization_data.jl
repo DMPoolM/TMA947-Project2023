@@ -38,8 +38,8 @@ node_consumers = [
 generator_node = [2, 2, 2, 3, 4, 5, 7, 9, 9]
 generator_capacity = [0.02, 0.15, 0.08, 0.07, 0.04, 0.17, 0.17, 0.26, 0.05]
 generator_cost = [175, 100, 150, 150, 300, 350, 400, 300, 200]
-generator_reactive_ub = 0.03 .* generator_capacity
-generator_reactive_lb = -0.03 .* generator_capacity
+generator_reactive_ub = 0.03 .* generator_capacity # Reactive power that generators absorbed
+generator_reactive_lb = -0.03 .* generator_capacity # Reactive power that generators produced
 n_generators = length(generator_node)
 node_reactive_power = [length(indexes) > 0 ? sum(generator_reactive_ub[i] for i in indexes) : 0 for indexes in node_generators]
 
