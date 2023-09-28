@@ -68,10 +68,11 @@ for (index, (k, l)) in enumerate(pairs)
     g_kl[l, k] = g_coeff[index]
 end
 
+# Amount of active power
 function p_kl(v_k, v_l, phi_k, phi_l, k::Int, l::Int)::Float64
     return v_k^2.0 * g_kl[k, l] - v_k * v_l * g_kl[k, l]*cos(phi_k - phi_l) - v_k * v_l * b_kl[k, l] * sin(phi_k - phi_l)
 end
-
+# Amount of reactive power
 function q_kl(v_k, v_l, phi_k, phi_l, k::Int, l::Int)::Float64
     return -v_k^2.0 * b_kl[k, l] + v_k * v_l * b_kl[k, l]*cos(phi_k - phi_l) - v_k * v_l * g_kl[k, l] * sin(phi_k - phi_l)
 end
