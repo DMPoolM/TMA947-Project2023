@@ -22,7 +22,7 @@ model = Model(Ipopt.Optimizer)
 active_power_constraints = []
 reactive_power_constraints = []
 for i in 1:n_nodes
-    # Contrain the flow of active power + generation - consumed at each node to be 0
+    # Contrain the flow of (active power + generation power - consumed power) at each node to be 0
     constraint = @NLconstraint(model, 
         - sum(
                 (v[i]^2.0 * g_kl[i, j] - v[i] * v[j] * g_kl[i, j]*cos(phi[i] - phi[j]) - v[i] * v[j] * b_kl[i, j] * sin(phi[i] - phi[j]))
@@ -33,8 +33,7 @@ for i in 1:n_nodes
         == 0
     )
     push!(active_power_constraints, constraint)
-    # Constrain the net flow of reactive power flowing into each node to be
-    # within the allowed limits for the generators at this location
+    # Constrain the net flow of reactive power flowing into each node to be within the allowed limits for the generators at this location 
     constraint = @NLconstraint(model, 
         - node_reactive_power[i]
         <= sum(
