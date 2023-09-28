@@ -1,4 +1,4 @@
-# Contains the data for this project eg. bounds and costs and such
+# Contains the data for this project, given data, bounds and costs ...
 
 using SparseArrays
 
